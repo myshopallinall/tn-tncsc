@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TNCSC Control Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #0d6efd;
+      --primary-dark: #0b5ed7;
+      --bg: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-main: #1f2933;
+      --muted: #6b7280;
+      --radius: 8px;
+      --shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, #e0f2ff 0, #f4f6f9 45%, #f9fafb 100%);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+      color: #fff;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.25);
+    }
+
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    header span {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(260px, 340px));
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: minmax(260px, 1fr); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(13,110,253,0.08), transparent 55%);
+      pointer-events: none;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      z-index: 1;
+    }
+
+    .icon-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(13,110,253,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: var(--primary);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .card-header h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .card-header span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .card-body {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      z-index: 1;
+    }
+
+    .meta {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      opacity: 0.9;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+    }
+
+    .primary-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 3px 6px rgba(37, 99, 235, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      padding: 10px 8px 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>TNCSC Operations Console</h1>
+      <span>District &amp; Variety-wise Daily Statements</span>
+    </div>
+    <span>Today: <span id="todayLabel"></span></span>
+  </header>
+
+  <main>
+    <div class="grid">
+      <!-- District Daily -->
+      <section class="card">
+        <div>
+          <div class="card-header">
+            <div class="icon-badge">D</div>
+            <div>
+              <h2>District Daily Statement</h2>
+              <span>Unit-wise daily issue summary</span>
+            </div>
+          </div>
+          <p class="card-body">
+            Capture district level opening balance, receipts and issues for the day.
+            Designed for quick high-level entry at the district office.
+          </p>
+        </div>
+        <div>
+          <div class="meta">
+            <span>Form: TNCSC‑D1</span>
+            <span>Avg. time: 2–3 min</span>
+          </div>
+          <button class="primary-btn" onclick="location.href='subindex1.html'">
+            Open District Daily
+            <span>↗</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Variety-wise -->
+      <section class="card">
+        <div>
+          <div class="card-header">
+            <div class="icon-badge">V</div>
+            <div>
+              <h2>Variety-wise Statement</h2>
+              <span>Scheme &amp; variety level stock</span>
+            </div>
+          </div>
+          <p class="card-body">
+            Record opening, on‑the‑day issue and cumulative stock for each rice variety
+            under every scheme and district unit.
+          </p>
+        </div>
+        <div>
+          <div class="meta">
+            <span>Form: TNCSC‑V1</span>
+            <span>Auto balance &amp; reports</span>
+          </div>
+          <button class="primary-btn" onclick="location.href='subindex2.html'">
+            Open Variety-wise Entry
+            <span>↗</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    TNCSC Internal Tool · Built for daily stock reporting
+  </footer>
+
+  <script>
+    const now = new Date();
+    document.getElementById('todayLabel').textContent =
+      now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+  </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TN District Daily Statement</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">TN District Daily Statement</div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-target="section-entry">Daily Entry Scheme</button>
+      <button class="nav-tab" data-target="section-master">Master</button>
+      <button class="nav-tab" data-target="section-report">Reports</button>
+    </nav>
+  </header>
+
+  <main class="main-wrap">
+    <!-- Master section: Head Office + Field -->
+    <section id="section-master" class="page-section">
+      <div class="box">
+        <h3>Head Office & District</h3>
+        <div>
+          <label for="hoDistrict">Select Head Office District / Unit:</label>
+          <select id="hoDistrict"></select>
+        </div>
+        <div>
+          <label for="isHeadOffice">Mark as Head Office:</label>
+          <input type="checkbox" id="isHeadOffice" />
+        </div>
+        <small>Only the selected Head Office can create new Field (Scheme) names.</small>
+      </div>
+
+      <div class="box">
+        <h3>Field (Scheme) Master</h3>
+        <div>
+          <label for="newFieldName">New Field / Scheme:</label>
+          <input type="text" id="newFieldName" placeholder="Ex: Rice Scheme" />
+          <button type="button" id="addFieldBtn">Add Field</button>
+        </div>
+        <div>
+          <label for="fieldSelectMaster">Existing Fields:</label>
+          <select id="fieldSelectMaster">
+            <option value="">-- Select Field --</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Daily Entry section -->
+    <section id="section-entry" class="page-section active">
+      <form id="entryForm" class="box">
+        <h3>Daily Entry</h3>
+        <input type="hidden" id="entryId" />
+
+        <div>
+          <label for="date">Date (auto today):</label>
+          <input type="date" id="date" required />
+        </div>
+
+        <div>
+          <label for="district">District / Unit:</label>
+          <select id="district" required></select>
+        </div>
+
+        <div>
+          <label for="field">Field / Scheme:</label>
+          <select id="field" required>
+            <option value="">-- Select Field --</option>
+          </select>
+        </div>
+
+        <div id="autoFillStatus" class="auto-fill-status" style="display:none;">
+          <strong>Auto-filled info</strong>
+          <div id="statusDetails"></div>
+        </div>
+
+        <div>
+          <label for="allotment">Allotment <small>(Auto / Manual)</small>:</label>
+          <input type="number" id="allotment" step="any" value="0" />
+          <span id="allotmentStatus" class="status-badge"></span>
+        </div>
+
+        <div>
+          <label for="openingBalance">Previous Day Balance <small>(Auto / Manual)</small>:</label>
+          <input type="number" id="openingBalance" step="any" value="0" />
+          <span id="openingBalanceStatus" class="status-badge"></span>
+        </div>
+
+        <div>
+          <label for="onTheDay">On The Day:</label>
+          <input type="number" id="onTheDay" step="any" value="0" />
+        </div>
+
+        <div>
+          <label for="uptoTheDay">Upto The Day <small>(Auto)</small>:</label>
+          <input type="number" id="uptoTheDay" step="any" value="0" readonly />
+          <span id="uptoTheDayStatus" class="status-badge"></span>
+        </div>
+
+        <div>
+          <label for="balance">Balance <small>(Auto)</small>:</label>
+          <input type="number" id="balance" step="any" value="0" readonly />
+          <span id="balanceStatus" class="status-badge"></span>
+        </div>
+
+        <hr />
+        <h4>Payment & Percentages</h4>
+
+        <div>
+          <label for="paymentPrev">Payment Prev Day:</label>
+          <input type="number" id="paymentPrev" step="any" value="0" />
+        </div>
+
+        <div>
+          <label for="paymentOn">Payment On The Day:</label>
+          <input type="number" id="paymentOn" step="any" value="0" />
+        </div>
+
+        <div>
+          <label for="paymentUpto">Payment Upto The Day <small>(Auto)</small>:</label>
+          <input type="number" id="paymentUpto" step="any" value="0" readonly />
+        </div>
+
+        <div>
+          <label for="paymentBalancePct">Payment Balance % <small>(Auto)</small>:</label>
+          <input type="number" id="paymentBalancePct" step="any" value="0" readonly />
+        </div>
+
+        <div>
+          <label for="allotmentBalancePct">Allotment Balance % <small>(Auto)</small>:</label>
+          <input type="number" id="allotmentBalancePct" step="any" value="0" readonly />
+        </div>
+
+        <button type="submit">Save</button>
+        <button type="button" id="resetBtn">Reset</button>
+      </form>
+    </section>
+
+    <!-- Report section -->
+    <section id="section-report" class="page-section">
+      <div class="box">
+        <h3>Report</h3>
+        <div>
+          <label for="fromDate">From date:</label>
+          <input type="date" id="fromDate" />
+        </div>
+        <div>
+          <label for="toDate">To date:</label>
+          <input type="date" id="toDate" />
+        </div>
+        <div>
+          <label for="reportDistrict">District / Unit:</label>
+          <select id="reportDistrict">
+            <option value="">All Districts</option>
+          </select>
+        </div>
+        <div>
+          <label for="reportField">Field / Scheme:</label>
+          <select id="reportField">
+            <option value="">All Fields</option>
+          </select>
+        </div>
+
+        <button type="button" id="filterBtn">Filter</button>
+        <button type="button" id="clearFilterBtn">Clear</button>
+        <button type="button" id="exportExcelBtn">Export to Excel</button>
+        <button type="button" id="exportPdfBtn">Export to PDF</button>
+
+        <div class="table-wrapper">
+          <table id="entryTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>District</th>
+                <th>Field</th>
+                <th>Allotment</th>
+                <th>Prev Bal</th>
+                <th>On The Day</th>
+                <th>Upto The Day</th>
+                <th>Balance</th>
+                <th>Pay Prev</th>
+                <th>Pay On</th>
+                <th>Pay Upto</th>
+                <th>Pay Bal %</th>
+                <th>Allot Bal %</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- XLSX + html2canvas + jsPDF for export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- App (ES module) -->
+  <script type="module" src="app.js"></script>
+
+  <!-- small tab script -->
+  <script>
+    const tabs = document.querySelectorAll('.nav-tab');
+    const sections = document.querySelectorAll('.page-section');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

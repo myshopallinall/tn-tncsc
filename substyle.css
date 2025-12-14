@@ -1,0 +1,184 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f5f6fa;
+}
+
+.topbar {
+  background: #0d6efd;
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-tab {
+  border: none;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-tab.active {
+  background: #fff;
+  color: #0d6efd;
+  font-weight: 600;
+}
+
+.main-wrap {
+  padding: 16px;
+}
+
+.page-section {
+  display: none;
+}
+
+.page-section.active {
+  display: block;
+}
+
+.box {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.form-row {
+  margin-bottom: 8px;
+}
+
+label {
+  display: inline-block;
+  width: 190px;
+  margin-bottom: 4px;
+}
+
+input,
+select {
+  padding: 4px;
+  font-size: 13px;
+}
+
+input[type="date"],
+select {
+  min-width: 220px;
+}
+
+input[type="number"] {
+  width: 110px;
+}
+
+input[readonly] {
+  background: #e8f5e9;
+  border: 1px solid #28a745;
+}
+
+/* tables */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 800px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 4px 6px;
+  text-align: right;
+  font-size: 13px;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+th {
+  background: #f0f0f0;
+}
+
+/* buttons */
+.btn-row {
+  margin-top: 10px;
+}
+
+button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 3px;
+  background: #0d6efd;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.action-btn {
+  padding: 3px 8px;
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.action-edit {
+  background: #17a2b8;
+}
+
+.action-delete {
+  background: #dc3545;
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  label {
+    width: 100%;
+  }
+
+  input,
+  select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  input[type="number"] {
+    width: 100%;
+  }
+
+  table {
+    min-width: 650px;
+  }
+}

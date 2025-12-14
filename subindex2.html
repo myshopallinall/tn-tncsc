@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TNCSC Variety-wise Statement</title>
+  <link rel="stylesheet" href="substyle.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">TNCSC Variety-wise Statement</div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-target="section-scheme">Scheme Master</button>
+      <button class="nav-tab" data-target="section-entry">Variety Entry</button>
+      <button class="nav-tab" data-target="section-report">Variety Report</button>
+    </nav>
+  </header>
+
+  <main class="main-wrap">
+    <!-- Scheme master (unchanged) -->
+    <section id="section-scheme" class="page-section active">
+      <section class="box">
+        <h3>Scheme Master (Head Office Only)</h3>
+
+        <div class="form-row">
+          <label for="currentUnit">Current Login Unit:</label>
+          <select id="currentUnit"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="headOfficeName">Head Office (from RTDB):</label>
+          <input type="text" id="headOfficeName" readonly />
+        </div>
+
+        <div class="form-row">
+          <label for="newSchemeName">New Scheme:</label>
+          <input type="text" id="newSchemeName" placeholder="Ex: AAY" />
+          <button id="addSchemeBtn">Add Scheme</button>
+        </div>
+
+        <div class="form-row">
+          <label for="schemeList">Existing Schemes:</label>
+          <select id="schemeList">
+            <option value="">-- Select Scheme --</option>
+          </select>
+        </div>
+      </section>
+    </section>
+
+    <!-- Variety entry -->
+    <section id="section-entry" class="page-section">
+      <section class="box">
+        <h3>Basic Details & Global Values</h3>
+
+        <div class="form-row">
+          <label for="date">Date (auto today):</label>
+          <input type="date" id="date" required />
+        </div>
+
+        <div class="form-row">
+          <label for="district">District / Unit:</label>
+          <select id="district" required></select>
+        </div>
+
+        <div class="form-row">
+          <label for="scheme">Scheme:</label>
+          <select id="scheme">
+            <option value="">-- Select Scheme --</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="commonAllot">Allotment (Global):</label>
+          <input type="number" id="commonAllot" step="any" value="0" />
+        </div>
+
+        <div class="form-row">
+          <label for="globalBalance">Global Balance:</label>
+          <input type="number" id="globalBalance" step="any" value="0" readonly />
+        </div>
+      </section>
+
+      <section class="box">
+        <h3>Variety-wise Entry</h3>
+        <div class="table-wrapper">
+          <table id="varietyTable">
+            <thead>
+              <tr>
+                <th>Variety</th>
+                <th>Prev Day</th>
+                <th>On The Day</th>
+                <th>Upto The Day</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="btn-row">
+          <button id="saveBtn">Save</button>
+          <button id="resetBtn">Reset</button>
+        </div>
+      </section>
+
+      <section class="box">
+        <h3>Saved Entries (current date / unit / scheme)</h3>
+        <div class="table-wrapper">
+          <table id="savedTable">
+            <thead>
+              <tr>
+                <th>Variety</th>
+                <th>Prev Day</th>
+                <th>On The Day</th>
+                <th>Upto The Day</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- Variety report (same idea: only one global balance, no per-row balance) -->
+    <section id="section-report" class="page-section">
+      <section class="box">
+        <h3>Variety-wise Report</h3>
+
+        <div class="form-row">
+          <label for="rFromDate">From date:</label>
+          <input type="date" id="rFromDate" />
+        </div>
+        <div class="form-row">
+          <label for="rToDate">To date:</label>
+          <input type="date" id="rToDate" />
+        </div>
+        <div class="form-row">
+          <label for="rDistrict">District / Unit:</label>
+          <select id="rDistrict">
+            <option value="">All Districts</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="rScheme">Scheme:</label>
+          <select id="rScheme">
+            <option value="">All Schemes</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="rVariety">Variety:</label>
+          <select id="rVariety">
+            <option value="">All Varieties</option>
+          </select>
+        </div>
+
+        <div class="btn-row">
+          <button id="rFilterBtn">Filter</button>
+          <button id="rClearBtn">Clear</button>
+          <button id="exportExcelBtn">Export Excel</button>
+          <button id="exportPdfBtn">Export PDF</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="reportTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>District</th>
+                <th>Scheme</th>
+                <th>Variety</th>
+                <th>Allotment (Global)</th>
+                <th>Prev Day</th>
+                <th>On The Day</th>
+                <th>Upto The Day</th>
+                <th>Global Balance</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="subapp.js"></script>
+
+  <script>
+    const tabs = document.querySelectorAll('.nav-tab');
+    const sections = document.querySelectorAll('.page-section');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.target).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
